@@ -1,13 +1,14 @@
 import imaplib
 import email
 import os
-from config import SENDER_EMAIL, SENDER_PASSWORD
+from config import SENDER_EMAIL, SENDER_PASSWORD, RECEIVER_EMAIL
 
 m = imaplib.IMAP4_SSL("imap.gmail.com", 993)
 m.login(SENDER_EMAIL, SENDER_PASSWORD)
 m.select('inbox') # select the inbox
 
-result, data = m.uid('search', '(FROM "20094010@mail.wit.ie")')
+query = '(FROM "{0}")'.format(RECEIVER_EMAIL)
+result, data = m.uid('search', None, query)
 print(result, data)
 
 def store_processed_uid(uid):
