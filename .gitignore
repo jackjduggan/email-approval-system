@@ -1,0 +1,6 @@
+# Python variables file that stores email information
+config.py
+
+db/
+
+__pycache__/
