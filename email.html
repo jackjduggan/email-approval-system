@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- THIS IS JUST USED FOR BUILDING THE EMAIL. ITS THEN PASTED INTO send.py-->
+<html>
+<head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f4f4f4;
+    }
+    .email-container {
+        max-width: 600px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .logo {
+        display: block;
+        margin: auto;
+        max-width: 200px;
+    }
+    .content {
+        margin-top: 20px;
+    }
+    .button {
+        display: inline-block;
+        margin: 20px 0;
+        padding: 10px 20px;
+        color: #fff;
+        background-color: #007bff;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+    .button-approve {
+        background-color: #6143E1;
+    }
+    .button-deny {
+        background-color: #20115F;
+    }
+</style>
+</head>
+<body>
+<div class="email-container">
+    <img src="images/InProv-logo-light-removebg-preview.png" alt="Company Logo" class="logo">
+    <h2>Approval Request</h2>
+    <p class="content">A new server is requesting approval. Provisioning will not begin until approved. Please reply to this email with <strong>Approve</strong> to approve, or <strong>Deny</strong> to deny.</p>
+    <!-- Example buttons for direct actions, ensure your email system supports this -->
+    <a href="mailto:your-email@example.com?subject=Approval Request - Approve&body=Approve" class="button button-approve">Approve</a>
+    <a href="mailto:your-email@example.com?subject=Approval Request - Deny&body=Deny" class="button button-deny">Deny</a>
+</div>
+</body>
+</html>

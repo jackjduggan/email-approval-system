@@ -4,10 +4,10 @@ import os
 from config import SENDER_EMAIL, SENDER_PASSWORD, RECEIVER_EMAIL
 
 m = imaplib.IMAP4_SSL("imap.gmail.com", 993)
-m.login(SENDER_EMAIL, SENDER_PASSWORD)
+m.login(SENDER_EMAIL, SENDER_PASSWORD) # login with email & passkey
 m.select('inbox') # select the inbox
 
-query = '(FROM "{0}")'.format(RECEIVER_EMAIL)
+query = '(FROM "{0}")'.format(RECEIVER_EMAIL) # look for emails from receiver
 result, data = m.uid('search', None, query)
 print(result, data)
 
@@ -30,7 +30,9 @@ if result == 'OK':
         result, data = m.fetch(num, '(RFC822)')
         if result == "OK":
             email_message = email.message_from_bytes(data[0][1])
+    
             if email_message.is_multipart():
+                # dealing with multipart emails (reply chains)
                 for part in email_message.walk():
                     if part.get_content_type() == "text/plain":
                         body = part.get_payload(decode=True).decode("utf-8")
@@ -41,7 +43,7 @@ if result == 'OK':
                         else:
                             print("Denied")
             else:
-                # Handling non-multipart emails (unlikely for replies, but just in case)
+                # Handling non-multipart emails (previously unlikely, now likely with mailto:)
                 body = email_message.get_payload(decode=True).decode("utf-8")
                 if "approve" in body.lower():
                     print("Approved")
